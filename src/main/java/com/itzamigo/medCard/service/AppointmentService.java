@@ -43,6 +43,7 @@ public class AppointmentService {
         appointment.setDoctorFullName(appointmentrequest.getDoctorFullName());
         appointment.setDiagnosis(appointmentrequest.getDiagnosis());
         appointment.setComplaints(appointmentrequest.getComplaints());
+        appointment.setDateOfVisit(appointmentrequest.getDateOfVisit());
        // appointment.setPatient(patient);
         return appointmentRepository.save(appointment);
     }
@@ -61,5 +62,9 @@ public class AppointmentService {
 
     public Patient getPatientByIIN(String iin) {
         return patientRepository.findByIIN(iin);
+    }
+
+    public void deleteAppointment(Long id) {
+        appointmentRepository.deleteById(id);
     }
 }

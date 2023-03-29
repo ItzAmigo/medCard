@@ -1,22 +1,27 @@
 package com.itzamigo.medCard.pojos;
 
+import java.util.Date;
+
 public class AppointmentRequest {
     private long id;
     private String specialist;
     private String doctorFullName;
     private String diagnosis;
     private String complaints;
+
+    private Date dateOfVisit;
     private int pat_id;
 
     public AppointmentRequest() {
     }
 
-    public AppointmentRequest(long id, String specialist, String doctorFullName, String diagnosis, String complaints, int pat_id) {
+    public AppointmentRequest(long id, String specialist, String doctorFullName, String diagnosis, String complaints, Date dateOfVisit, int pat_id) {
         this.id = id;
         this.specialist = specialist;
         this.doctorFullName = doctorFullName;
         this.diagnosis = diagnosis;
         this.complaints = complaints;
+        this.dateOfVisit = dateOfVisit;
         this.pat_id = pat_id;
     }
 
@@ -58,6 +63,14 @@ public class AppointmentRequest {
 
     public void setComplaints(String complaints) {
         this.complaints = complaints;
+    }
+
+    public Date getDateOfVisit() {
+        return dateOfVisit;
+    }
+
+    public void setDateOfVisit(Date dateOfVisit) {
+        this.dateOfVisit = dateOfVisit;
     }
 
     public int getPat_id() {

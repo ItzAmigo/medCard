@@ -5,10 +5,7 @@ import com.itzamigo.medCard.entity.Patient;
 import com.itzamigo.medCard.pojos.AppointmentRequest;
 import com.itzamigo.medCard.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,6 +39,11 @@ public class PatientController {
     @PostMapping("saveappointment")
     public Appointment addAppointment(@RequestBody AppointmentRequest appointmentRequest){
         return  appointmentService.addAppointment(appointmentRequest);
+    }
+
+    @DeleteMapping("deleteappointmentbyid/{id}")
+    public void deleteAppointment(@PathVariable("id") Long id) {
+        appointmentService.deleteAppointment(id);
     }
 
     @GetMapping("getpatients")

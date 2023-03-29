@@ -2,6 +2,7 @@ package com.itzamigo.medCard.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.Set;
 
@@ -14,15 +15,19 @@ public class Patient {
     private int id;
 
     @Column(name = "iin")
+    @Pattern(regexp = "^[0-9]{12}$")
     private String IIN;
 
     @Column(name = "full_name")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я '&/.,()-]{10,60}$")
     private String fullName;
 
     @Column(name = "address")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я .,:;'/&()-]{5,60}$")
     private String address;
 
     @Column(name = "number")
+    @Pattern(regexp = "^[0-9 +()-]{11,20}$")
     private String number;
 
     @JsonIgnore
