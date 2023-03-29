@@ -1,6 +1,7 @@
 package com.itzamigo.medCard.controller;
 
 import com.itzamigo.medCard.entity.Appointment;
+import com.itzamigo.medCard.entity.Patient;
 import com.itzamigo.medCard.pojos.AppointmentRequest;
 import com.itzamigo.medCard.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,26 @@ public class PatientController {
     @PostMapping("saveappointment")
     public Appointment addAppointment(@RequestBody AppointmentRequest appointmentRequest){
         return  appointmentService.addAppointment(appointmentRequest);
+    }
+
+    @GetMapping("getpatients")
+    public List<Patient> getPatients(){
+        return appointmentService.getPatients();
+    }
+
+    @PostMapping("addpatient")
+    public Patient savePatient(@RequestBody Patient patient){
+        return appointmentService.savePatient(patient);
+
+    }
+
+    @GetMapping("getpatient")
+    public Patient getPatient(String fullName){
+        return appointmentService.getPatient(fullName);
+    }
+
+    @GetMapping("getpatientbyiin")
+    public Patient getPatientByIIN(String iin){
+        return appointmentService.getPatientByIIN(iin);
     }
 }

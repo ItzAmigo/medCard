@@ -46,4 +46,20 @@ public class AppointmentService {
        // appointment.setPatient(patient);
         return appointmentRepository.save(appointment);
     }
+
+    public List<Patient> getPatients() {
+        return patientRepository.findAll();
+    }
+
+    public Patient savePatient(Patient patient) {
+        return patientRepository.save(patient);
+    }
+
+    public Patient getPatient(String fullName) {
+        return patientRepository.findByFullName(fullName);
+    }
+
+    public Patient getPatientByIIN(String iin) {
+        return patientRepository.findByIIN(iin);
+    }
 }
