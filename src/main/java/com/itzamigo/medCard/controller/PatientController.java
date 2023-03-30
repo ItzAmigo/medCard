@@ -3,17 +3,22 @@ package com.itzamigo.medCard.controller;
 import com.itzamigo.medCard.entity.Appointment;
 import com.itzamigo.medCard.entity.Patient;
 import com.itzamigo.medCard.pojos.AppointmentRequest;
+import com.itzamigo.medCard.repository.PatientRepository;
 import com.itzamigo.medCard.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class PatientController {
 
     @Autowired
     AppointmentService appointmentService;
+    @Autowired
+    PatientRepository patientRepository;
 
     @GetMapping("sayhello")
     public String sayHello() {
@@ -30,6 +35,10 @@ public class PatientController {
         return appointmentService.saveAppointment(appointment);
 
     }
+    @PostMapping("saveappointment")
+    public Appointment addAppointment(@RequestBody AppointmentRequest appointmentRequest){
+        return  appointmentService.addAppointment(appointmentRequest);
+    }
 
     @RequestMapping(value="/getappointment",method= RequestMethod.GET, headers = "Accept=application/json")
     public List<Appointment> getAppointment(@RequestParam String doctorFullName){
@@ -41,9 +50,9 @@ public class PatientController {
         return appointmentService.getAppointmentByPatId(pat_id);
     }
 
-    @PostMapping("saveappointment")
-    public Appointment addAppointment(@RequestBody AppointmentRequest appointmentRequest){
-        return  appointmentService.addAppointment(appointmentRequest);
+    @RequestMapping(value="/editappointment",method= RequestMethod.PUT, headers = "Accept=application/json")
+    public void updateAppointment(@RequestBody Appointment appointmentDetails) {
+        appointmentService.updateAppointment(appointmentDetails);
     }
 
     @DeleteMapping("deleteappointmentbyid/{id}")
@@ -52,7 +61,6 @@ public class PatientController {
     }
 
     @RequestMapping(value="/getpatients",method= RequestMethod.GET, headers = "Accept=application/json")
-    @CrossOrigin
     public List<Patient> getPatients(){
         return appointmentService.getPatients();
     }
@@ -68,10 +76,19 @@ public class PatientController {
         return appointmentService.getPatient(fullName);
     }
 
+
     @GetMapping("getpatientbyiin")
     public Patient getPatientByIIN(String iin){
         return appointmentService.getPatientByIIN(iin);
     }
 
+    @RequestMapping(value="/editpatient",method= RequestMethod.PUT, headers = "Accept=application/json")
+    public void updatePatient(@RequestBody Patient patientDetails) {
+        appointmentService.updatePatient(patientDetails);
+    }
 
+    @DeleteMapping("deletepatientbyid/{id}")
+    public void deletePatient(@PathVariable("id") int id) {
+        appointmentService.deletePatient(id);
+    }
 }

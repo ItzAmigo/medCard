@@ -9,5 +9,4 @@ public interface PatientRepository extends JpaRepository<Patient,Integer> {
     Patient findByFullName(String fullName);
 
     Patient findByIIN(String iin);
-    //Patient findbyId(int id);
 }

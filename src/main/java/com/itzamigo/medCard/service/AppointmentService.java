@@ -30,11 +30,9 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
-
     public List<Appointment> getAppointment(String doctorFullName){
         return appointmentRepository.findByDoctorFullName(doctorFullName);
     }
-
 
     public Appointment addAppointment(AppointmentRequest appointmentrequest) {
         //Patient patient = patientRepository.findbyId(appointmentrequest.getPat_id());
@@ -47,6 +45,18 @@ public class AppointmentService {
         appointment.setDateOfVisit(appointmentrequest.getDateOfVisit());
        // appointment.setPatient(patient);
         return appointmentRepository.save(appointment);
+    }
+
+    public void deleteAppointment(Long id) {
+        appointmentRepository.deleteById(id);
+    }
+
+    public List<Appointment> getAppointmentByPatId(int pat_id) {
+        return appointmentRepository.FindAppointmentByPatId(pat_id);
+    }
+
+    public void updateAppointment(Appointment appointmentDetails) {
+        appointmentRepository.save(appointmentDetails);
     }
 
     public List<Patient> getPatients() {
@@ -65,11 +75,10 @@ public class AppointmentService {
         return patientRepository.findByIIN(iin);
     }
 
-    public void deleteAppointment(Long id) {
-        appointmentRepository.deleteById(id);
+    public void deletePatient(int id) { patientRepository.deleteById(id);
     }
 
-    public List<Appointment> getAppointmentByPatId(int pat_id) {
-        return appointmentRepository.FindByAppointmentByPatId(pat_id);
+    public void updatePatient(Patient patientDetails) {
+        patientRepository.save(patientDetails);
     }
 }
