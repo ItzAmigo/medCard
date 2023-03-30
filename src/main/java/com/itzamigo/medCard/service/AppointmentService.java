@@ -30,7 +30,8 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
-    public Appointment getAppointment(String doctorFullName){
+
+    public List<Appointment> getAppointment(String doctorFullName){
         return appointmentRepository.findByDoctorFullName(doctorFullName);
     }
 
@@ -66,5 +67,9 @@ public class AppointmentService {
 
     public void deleteAppointment(Long id) {
         appointmentRepository.deleteById(id);
+    }
+
+    public List<Appointment> getAppointmentByPatId(int pat_id) {
+        return appointmentRepository.FindByAppointmentByPatId(pat_id);
     }
 }

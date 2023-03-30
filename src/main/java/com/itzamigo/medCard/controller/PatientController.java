@@ -31,9 +31,14 @@ public class PatientController {
 
     }
 
-    @GetMapping("getappointment")
-    public Appointment getAppointment(String doctorFullName){
+    @RequestMapping(value="/getappointment",method= RequestMethod.GET, headers = "Accept=application/json")
+    public List<Appointment> getAppointment(@RequestParam String doctorFullName){
         return appointmentService.getAppointment(doctorFullName);
+    }
+
+    @RequestMapping(value="/getAppointmentsByPatId/{pat_id}",method= RequestMethod.GET, headers = "Accept=application/json")
+    public List<Appointment> getAppointmentsByPatId(@PathVariable int pat_id){
+        return appointmentService.getAppointmentByPatId(pat_id);
     }
 
     @PostMapping("saveappointment")
@@ -46,7 +51,8 @@ public class PatientController {
         appointmentService.deleteAppointment(id);
     }
 
-    @GetMapping("getpatients")
+    @RequestMapping(value="/getpatients",method= RequestMethod.GET, headers = "Accept=application/json")
+    @CrossOrigin
     public List<Patient> getPatients(){
         return appointmentService.getPatients();
     }
@@ -58,7 +64,7 @@ public class PatientController {
     }
 
     @GetMapping("getpatient")
-    public Patient getPatient(String fullName){
+    public Patient getPatient(@RequestParam("fullName") String fullName){
         return appointmentService.getPatient(fullName);
     }
 
@@ -66,4 +72,6 @@ public class PatientController {
     public Patient getPatientByIIN(String iin){
         return appointmentService.getPatientByIIN(iin);
     }
+
+
 }

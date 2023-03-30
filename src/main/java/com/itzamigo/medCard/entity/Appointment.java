@@ -1,5 +1,6 @@
 package com.itzamigo.medCard.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 
@@ -38,6 +39,7 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "pat_id", insertable = false, updatable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Patient patient;
 
     public Appointment() {
